@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      debugShowCheckedModeBanner: ConfigReader.isDebug(),
+      //debugShowCheckedModeBanner: ConfigReader.isDebug(),
       onGenerateRoute: Routing.generateRoute,
       //initialRoute: RoutingConst.splashRoute,
       home: const SplashScreenPage(),
