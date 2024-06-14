@@ -5,7 +5,7 @@ import 'package:obs_news/config_reader.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  //await ConfigReader.initialize();
+  await ConfigReader.initialize();
 
   runApp(const MyApp());
 }
