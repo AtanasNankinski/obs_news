@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:obs_news/theme/colors.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 ThemeData mainTheme = ThemeData(
   primaryColor: primaryColor,
@@ -26,11 +25,10 @@ ElevatedButtonThemeData elevatedButtonThemeData = ElevatedButtonThemeData(
             Radius.circular(30)
         )
     ),
-    textStyle: GoogleFonts.inter(
-        textStyle: const TextStyle(
-          fontSize: 18,
-          fontWeight: FontWeight.w500,
-        )
+    textStyle: const TextStyle(
+      fontFamily: 'Inter',
+      fontSize: 18,
+      fontWeight: FontWeight.w500,
     ),
     disabledBackgroundColor: colorButtonDisabled,
   ),
@@ -49,12 +47,14 @@ TextTheme textTheme = TextTheme(
     color: mainTextColor,
     fontSize: 14
   ),
-  headlineSmall: GoogleFonts.roboto(
+  headlineSmall: TextStyle(
+    fontFamily: 'Roboto',
     color: secondaryTextColor,
     fontSize: 24,
     fontWeight: FontWeight.w500,
   ),
-  headlineLarge: GoogleFonts.roboto(
+  headlineLarge: TextStyle(
+    fontFamily: 'Roboto',
     color: secondaryTextColor,
     fontSize: 42,
     fontWeight: FontWeight.w500,

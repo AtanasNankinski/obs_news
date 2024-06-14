@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 import 'package:obs_news/navigation/routing_constants.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class SplashScreenPage extends StatefulWidget {
   const SplashScreenPage({Key? key}) : super(key: key);
@@ -42,13 +41,13 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
             ),
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16),
           child: Column(
             children: [
-              const Spacer(),
-              const Spacer(),
-              const Spacer(),
+              Spacer(),
+              Spacer(),
+              Spacer(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -58,7 +57,8 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.center,
-                      style: GoogleFonts.inter(
+                      style: TextStyle(
+                        fontFamily: 'Inter',
                         color: Colors.white,
                         fontSize: 40,
                         fontWeight: FontWeight.bold,
@@ -67,7 +67,7 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
                   ),
                 ],
               ),
-              const Spacer(),
+              Spacer(),
             ],
           ),
         ),

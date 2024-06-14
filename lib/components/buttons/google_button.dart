@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:obs_news/theme/colors.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 Widget googleButton({
   required VoidCallback onPressed,
@@ -11,6 +10,24 @@ Widget googleButton({
     margin: const EdgeInsets.symmetric(vertical: 4),
     child: ElevatedButton(
       onPressed: onPressed,
+      style: ElevatedButton.styleFrom(
+        minimumSize: const Size(100, 40),
+        padding: const EdgeInsets.symmetric(horizontal: 8),
+        backgroundColor: colorButtonGoogle,
+        foregroundColor: colorButtonTextDarkColor,
+        elevation: 0,
+        shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
+                Radius.circular(30)
+            )
+        ),
+        textStyle: const TextStyle(
+          fontFamily: 'Inter',
+          fontSize: 18,
+          fontWeight: FontWeight.w500,
+        ),
+        disabledBackgroundColor: colorButtonDisabled,
+      ),
       child: Padding(
         padding: EdgeInsets.zero,
         child: Row(
@@ -28,25 +45,6 @@ Widget googleButton({
             Container(width: 26,),
           ],
         ),
-      ),
-      style: ElevatedButton.styleFrom(
-        minimumSize: const Size(100, 40),
-        padding: const EdgeInsets.symmetric(horizontal: 8),
-        backgroundColor: colorButtonGoogle,
-        foregroundColor: colorButtonTextDarkColor,
-        elevation: 0,
-        shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(
-                Radius.circular(30)
-            )
-        ),
-        textStyle: GoogleFonts.inter(
-            textStyle: const TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.w500,
-            )
-        ),
-        disabledBackgroundColor: colorButtonDisabled,
       ),
     ),
   );

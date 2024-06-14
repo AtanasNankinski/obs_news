@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:google_fonts/google_fonts.dart';
-
 Widget primaryButton({
   required VoidCallback onPressed,
   required String content,
@@ -13,9 +11,9 @@ Widget primaryButton({
       onPressed: onPressed,
       child: Text(
         content,
-        style: GoogleFonts.inter(
-          textStyle: Theme.of(context).textTheme.bodyMedium,
-        )
+        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+          fontFamily: 'Inter',
+        ),
       ),
     ),
   );
