@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class BaseWidget extends StatefulWidget {
-  const BaseWidget({Key? key, this.title, this.init, required this.hasPadding, required this.body}) : super(key: key);
+  const BaseWidget({super.key, this.title, this.init, required this.hasPadding, required this.body});
 
   final VoidCallback? init;
   final bool hasPadding;

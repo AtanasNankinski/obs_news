@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:obs_news/navigation/routing_constants.dart';
 
 class SplashScreenPage extends StatefulWidget {
-  const SplashScreenPage({Key? key}) : super(key: key);
+  const SplashScreenPage({super.key});
 
   @override
   State<SplashScreenPage> createState() => _SplashScreenPageState();
