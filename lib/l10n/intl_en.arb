@@ -1,0 +1,7 @@
+{
+    "signIn": "Sign In",
+    "googleSignIn": "Google Sign In",
+    "facebookSignIn": "Facebook Sign In",
+    "signInSeparator": "or",
+    "emailSignIn": "Email Sign In"
+}
