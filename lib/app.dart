@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:obs_news/config_reader.dart';
+import 'package:obs_news/utility/config_reader.dart';
 import 'package:obs_news/localization/localization_notifier.dart';
 import 'package:obs_news/navigation/routing.dart';
 import 'package:obs_news/navigation/routing_constants.dart';
