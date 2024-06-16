@@ -14,6 +14,17 @@ class LocalizationNotifier extends AutoDisposeAsyncNotifier<Locale> {
   }
 
   void changeLocale(Locale newLocale) {
+    switch(currentLocale.languageCode) {
+      case 'en':
+        newLocale = const Locale('bg');
+        break;
+      case 'bg':
+        newLocale = const Locale('en');
+        break;
+      default:
+        newLocale = const Locale('en');
+        break;
+    }
     currentLocale = newLocale;
     SharedPreferencesService().setLocale(newLocale);
 

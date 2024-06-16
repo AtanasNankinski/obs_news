@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:obs_news/app.dart';
 
 import 'package:obs_news/components/base_layout.dart';
+import 'package:obs_news/components/buttons/flag_button.dart';
 import 'package:obs_news/components/buttons/google_button.dart';
 import 'package:obs_news/components/buttons/primary_button.dart';
 import 'package:obs_news/components/separator_with_text.dart';
 import 'package:obs_news/components/buttons/facebook_button.dart';
 import 'package:obs_news/navigation/routing_constants.dart';
+import 'package:obs_news/app.dart';
 
 class SignInPage extends ConsumerWidget {
   const SignInPage({super.key});
@@ -49,21 +50,21 @@ class SignInPage extends ConsumerWidget {
           const Spacer(),
           Row(
             children: [
-              primaryButton(
-                onPressed: () {
-                  ref.read(localizationProvider.notifier).changeLocale(Locale('en'));
+              const Spacer(),
+              ref.watch(localizationProvider).when(
+                data: (locale) {
+                  return FlagButton(
+                      child: locale.languageCode == 'bg'
+                        ? Image.asset('assets/images/bg_flag.jpg', fit: BoxFit.cover,)
+                        : Image.asset('assets/images/en_flag.jpg', fit: BoxFit.cover,),
+                      onTap: () {
+                        ref.read(localizationProvider.notifier).changeLocale(locale);
+                      },
+                  );
                 },
-                content: "EN",
-                context: context,
-              ),
-              Spacer(),
-              primaryButton(
-                onPressed: () {
-                  ref.read(localizationProvider.notifier).changeLocale(Locale('bg'));
-                },
-                content: "BG",
-                context: context,
-              ),
+                error: (error, _) => Image.asset('assets/images/en_flag.jpg', fit: BoxFit.cover,),
+                loading: () => const CircularProgressIndicator(),
+              )
             ],
           ),
         ],
