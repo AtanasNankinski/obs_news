@@ -14,5 +14,6 @@ const colorButtonDisabled = Color(0xFFA686B0);
 const colorButtonGoogle = Colors.white;
 const colorButtonTextDarkColor = Colors.black;
 const colorButtonFacebook = Color(0xFF0078F5);
+const colorButtonFlagMain = Color(0xFFA259B6);
 //Separator Colors
 final colorSeparator = Colors.white.withOpacity(0.8);

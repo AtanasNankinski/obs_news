@@ -9,14 +9,22 @@ import 'package:obs_news/components/buttons/google_button.dart';
 import 'package:obs_news/components/buttons/primary_button.dart';
 import 'package:obs_news/components/separator_with_text.dart';
 import 'package:obs_news/components/buttons/facebook_button.dart';
+import 'package:obs_news/localization/localization_controller.dart';
 import 'package:obs_news/navigation/routing_constants.dart';
-import 'package:obs_news/app.dart';
+import 'package:obs_news/utility/extensions/async_value_ui.dart';
 
 class SignInPage extends ConsumerWidget {
   const SignInPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final AsyncValue<Locale> localeState = ref.watch(localizationProvider);
+
+    ref.listen(
+      localizationProvider,
+      (_, state) => state.showSnackBarOnError(context, errorText: AppLocalizations.of(context)!.localizationError),
+    );
+
     return BaseWidget(
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -51,19 +59,19 @@ class SignInPage extends ConsumerWidget {
           Row(
             children: [
               const Spacer(),
-              ref.watch(localizationProvider).when(
+              localeState.when(
                 data: (locale) {
                   return FlagButton(
                       child: locale.languageCode == 'bg'
                         ? Image.asset('assets/images/bg_flag.jpg', fit: BoxFit.cover,)
                         : Image.asset('assets/images/en_flag.jpg', fit: BoxFit.cover,),
                       onTap: () {
-                        ref.read(localizationProvider.notifier).changeLocale(locale);
+                        ref.read(localizationProvider.notifier).changeLocale();
                       },
                   );
                 },
                 error: (error, _) => Image.asset('assets/images/en_flag.jpg', fit: BoxFit.cover,),
-                loading: () => const CircularProgressIndicator(),
+                loading: () => const FlagButton(),
               )
             ],
           ),

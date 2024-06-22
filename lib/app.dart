@@ -4,7 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:obs_news/utility/config_reader.dart';
-import 'package:obs_news/localization/localization_notifier.dart';
+import 'package:obs_news/localization/localization_controller.dart';
 import 'package:obs_news/navigation/routing.dart';
 import 'package:obs_news/navigation/routing_constants.dart';
 import 'package:obs_news/theme/theme.dart';
@@ -28,7 +28,3 @@ class MyApp extends ConsumerWidget {
     );
   }
 }
-
-final localizationProvider = AsyncNotifierProvider.autoDispose<LocalizationNotifier ,Locale>(
-  LocalizationNotifier.new,
-);
