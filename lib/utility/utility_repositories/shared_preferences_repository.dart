@@ -1,7 +1,9 @@
 import 'dart:ui';
 
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+
+part 'shared_preferences_repository.g.dart';
 
 class SharedPreferencesRepository {
   final SharedPreferences _sharedPrefs;
@@ -22,6 +24,7 @@ class SharedPreferencesKeys {
   static const String locale = 'locale';
 }
 
-final sharedPreferencesProvider = Provider<SharedPreferencesRepository>((ref) {
+@riverpod
+SharedPreferencesRepository sharedPreferences(SharedPreferencesRef ref) {
   throw UnimplementedError();
-});
+}
