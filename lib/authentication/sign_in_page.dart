@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:obs_news/components/base_layout.dart';
-import 'package:obs_news/components/buttons/flag_button.dart';
-import 'package:obs_news/components/buttons/google_button.dart';
-import 'package:obs_news/components/buttons/primary_button.dart';
-import 'package:obs_news/components/separator_with_text.dart';
-import 'package:obs_news/components/buttons/facebook_button.dart';
+import 'package:obs_news/shared/components/base_layout.dart';
+import 'package:obs_news/shared/components/buttons/flag_button.dart';
+import 'package:obs_news/shared/components/buttons/google_button.dart';
+import 'package:obs_news/shared/components/buttons/primary_button.dart';
+import 'package:obs_news/shared/components/separator_with_text.dart';
+import 'package:obs_news/shared/components/buttons/facebook_button.dart';
 import 'package:obs_news/shared/localization/localization_controller.dart';
 import 'package:obs_news/shared/navigation/routing_constants.dart';
 

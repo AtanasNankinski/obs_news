@@ -3,9 +3,9 @@ import 'package:flutter/gestures.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import 'package:obs_news/components/base_layout.dart';
-import 'package:obs_news/components/buttons/primary_button.dart';
-import 'package:obs_news/components/input/auth_input_field.dart';
+import 'package:obs_news/shared/components/base_layout.dart';
+import 'package:obs_news/shared/components/buttons/primary_button.dart';
+import 'package:obs_news/shared/components/input/auth_input_field.dart';
 import 'package:obs_news/shared/navigation/routing_constants.dart';
 import 'package:obs_news/shared/theme/colors.dart';
 

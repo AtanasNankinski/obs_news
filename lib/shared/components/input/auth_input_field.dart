@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:obs_news/components/decorations/input_decorations.dart';
+import 'package:obs_news/shared/components/decorations/input_decorations.dart';
 import 'package:obs_news/shared/theme/colors.dart';
 
 class AuthInputField extends ConsumerWidget {
