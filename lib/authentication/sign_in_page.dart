@@ -9,8 +9,8 @@ import 'package:obs_news/components/buttons/google_button.dart';
 import 'package:obs_news/components/buttons/primary_button.dart';
 import 'package:obs_news/components/separator_with_text.dart';
 import 'package:obs_news/components/buttons/facebook_button.dart';
-import 'package:obs_news/localization/localization_controller.dart';
-import 'package:obs_news/navigation/routing_constants.dart';
+import 'package:obs_news/shared/localization/localization_controller.dart';
+import 'package:obs_news/shared/navigation/routing_constants.dart';
 
 class SignInPage extends ConsumerWidget {
   const SignInPage({super.key});
@@ -44,7 +44,7 @@ class SignInPage extends ConsumerWidget {
           ),
           primaryButton(
             onPressed: (){
-              Navigator.pushReplacementNamed(context, RoutingConst.signInWithEmail);
+              Navigator.pushNamed(context, RoutingConst.signInWithEmail);
             },
             content: AppLocalizations.of(context)!.emailSignIn,
             context: context,

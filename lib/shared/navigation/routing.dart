@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:obs_news/authentication/login_page.dart';
 
-import 'package:obs_news/navigation/routing_constants.dart';
 import 'package:obs_news/components/control_widget.dart';
+import 'package:obs_news/shared/navigation/routing_constants.dart';
 import 'package:obs_news/splash_screen/splash_screen_page.dart';
 import 'package:obs_news/authentication/sign_in_with_email_page.dart';
 
@@ -21,6 +22,11 @@ class Routing {
       case RoutingConst.signInWithEmail:
         return MaterialPageRoute(
           builder: (context) => const SignInWithEmailPage(),
+          settings: settings,
+        );
+      case RoutingConst.login:
+        return MaterialPageRoute(
+          builder: (context) => const LoginPage(),
           settings: settings,
         );
       default:

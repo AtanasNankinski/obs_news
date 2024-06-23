@@ -5,4 +5,5 @@ class RoutingConst {
   // Route to the splash screen
   static const String splashRoute = "splash";
   static const String signInWithEmail = "sign_in_with_email";
+  static const String login = "login";
 }

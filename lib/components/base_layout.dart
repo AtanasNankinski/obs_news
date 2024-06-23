@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class BaseWidget extends StatefulWidget {
+class BaseWidget extends StatelessWidget {
   const BaseWidget({super.key, this.title, this.init, required this.hasPadding, required this.body});
 
   final VoidCallback? init;
@@ -9,25 +9,12 @@ class BaseWidget extends StatefulWidget {
   final Widget? title;
 
   @override
-  State<BaseWidget> createState() => _BaseWidgetState();
-}
-
-class _BaseWidgetState extends State<BaseWidget> {
-  @override
-  void initState() {
-    if(widget.init != null) {
-      widget.init!();
-    }
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      appBar: widget.title != null
+      resizeToAvoidBottomInset: true,
+      appBar: title != null
         ? AppBar(
-          title: widget.title!,
+          title: title!,
         )
         : null,
       body: SafeArea(
@@ -40,8 +27,8 @@ class _BaseWidgetState extends State<BaseWidget> {
                   child: Stack(
                     children: [
                       Padding(
-                        padding: widget.hasPadding ? const EdgeInsets.all(18.0) : EdgeInsets.zero,
-                        child: widget.body,
+                        padding: hasPadding ? const EdgeInsets.all(18.0) : EdgeInsets.zero,
+                        child: body,
                       ),
                     ],
                   )

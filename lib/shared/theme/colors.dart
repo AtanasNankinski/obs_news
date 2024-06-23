@@ -7,6 +7,8 @@ const Color appBarColor = Color(0xFF752899);
 //Text Colors
 const Color mainTextColor = Colors.white;
 final Color secondaryTextColor = Colors.white.withOpacity(0.9);
+final Color colorTextInputField = Colors.black.withOpacity(0.8);
+const Color colorTextHyperlink = Color(0xFF00FFFF);
 //Button Colors
 final colorButtonMain = const Color(0xFFA259B6).withOpacity(0.96);
 final colorButtonText = Colors.white.withOpacity(0.9);

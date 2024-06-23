@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:obs_news/theme/colors.dart';
+import 'package:obs_news/shared/theme/colors.dart';
 
 Widget sectionSeparator({required String text, required BuildContext context}) {
   return Row(

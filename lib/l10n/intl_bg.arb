@@ -4,5 +4,12 @@
     "facebookSignIn": "Facebook Вписване",
     "signInSeparator": "или",
     "emailSignIn": "Email Вписване",
-    "localizationError": "Възникна грешка при промяна на езика."
+    "localizationError": "Възникна грешка при промяна на езика.",
+    "registerScreenTitle": "Регистрация",
+    "registerScreenFirstName": "Име",
+    "registerScreenLastName": "Фамилия",
+    "registerScreenEmail": "Имейл",
+    "registerScreenPassword": "Парола",
+    "registerScreenConfirmPassword": "Потвърди Паролата",
+    "registerScreenButtonText": "Регистрация"
 }

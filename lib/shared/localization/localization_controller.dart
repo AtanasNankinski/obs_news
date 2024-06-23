@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import 'package:obs_news/utility/utility_repositories/shared_preferences_repository.dart';
+import 'package:obs_news/shared/shared_preferences/shared_preferences_repository.dart';
 
 part 'localization_controller.g.dart';
 
@@ -20,8 +20,6 @@ class LocalizationController extends _$LocalizationController {
 
     await _sharedPrefs.setLocale(locale);
     state = _sharedPrefs.getLocale();
-
-    ref.invalidateSelf();
   }
 
   Locale _determineNewLocale(Locale locale) {

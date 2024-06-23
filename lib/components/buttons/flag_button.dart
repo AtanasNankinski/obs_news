@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:obs_news/theme/colors.dart';
+import 'package:obs_news/shared/theme/colors.dart';
 
 class FlagButton extends StatelessWidget {
   const FlagButton({super.key,required this.child, required this.onTap});
