@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:obs_news/authentication/sign_in_page.dart';
-import 'package:obs_news/news/news_page.dart';
+import 'package:obs_news/features/authentication/sign_in_page.dart';
+import 'package:obs_news/features/news/news_page.dart';
 
 class AuthControlWidget extends StatelessWidget {
   const AuthControlWidget({super.key});
