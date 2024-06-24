@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 import 'package:obs_news/app.dart';
 import 'package:obs_news/shared/shared_preferences/shared_preferences_repository.dart';
@@ -11,6 +12,9 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await ConfigReader.initialize();
   final sharedPreferences = await SharedPreferences.getInstance();
+  await Firebase.initializeApp(
+    options: options,
+  );
 
   runApp(
     ProviderScope(
@@ -23,3 +27,10 @@ void main() async {
     ),
   );
 }
+
+const FirebaseOptions options = FirebaseOptions(
+  apiKey: 'AIzaSyCICKCsmCbsMZC3H-BQWXs2PJGemus30lk',
+  messagingSenderId: '576626303302',
+  appId: '1:576626303302:android:0dbe0253703069725c8547',
+  projectId: 'obs-news-dev',
+);

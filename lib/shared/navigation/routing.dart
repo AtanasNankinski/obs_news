@@ -21,7 +21,7 @@ class Routing {
         );
       case RoutingConst.signInWithEmail:
         return MaterialPageRoute(
-          builder: (context) => const SignInWithEmailPage(),
+          builder: (context) => SignInWithEmailPage(),
           settings: settings,
         );
       case RoutingConst.login:

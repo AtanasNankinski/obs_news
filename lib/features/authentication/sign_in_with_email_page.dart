@@ -2,6 +2,8 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:obs_news/features/authentication/auth_controller.dart';
 
 import 'package:obs_news/shared/components/base_layout.dart';
 import 'package:obs_news/shared/components/buttons/primary_button.dart';
@@ -9,16 +11,22 @@ import 'package:obs_news/shared/components/input/auth_input_field.dart';
 import 'package:obs_news/shared/navigation/routing_constants.dart';
 import 'package:obs_news/shared/theme/colors.dart';
 
-class SignInWithEmailPage extends StatelessWidget {
+class SignInWithEmailPage extends ConsumerWidget {
   const SignInWithEmailPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final TextEditingController firstNameController = TextEditingController();
-    final TextEditingController lastNameController = TextEditingController();
+  Widget build(BuildContext context, WidgetRef ref) {
+    final TextEditingController usernameNameController = TextEditingController();
     final TextEditingController emailController = TextEditingController();
     final TextEditingController passwordController = TextEditingController();
     final TextEditingController confirmPasswordController = TextEditingController();
+    
+    final authState = ref.watch(authControllerProvider);
+    authState.whenData((user) {
+      if (user != null) {
+        Navigator.pushReplacementNamed(context, RoutingConst.defaultRoute);
+      }
+    });
 
 
     return GestureDetector(
@@ -36,14 +44,9 @@ class SignInWithEmailPage extends StatelessWidget {
             ),
             const Spacer(),
             AuthInputField(
-              controller: firstNameController,
+              controller: usernameNameController,
               inputType: TextFieldType.text,
-              hintText: AppLocalizations.of(context)!.registerScreenFirstName,
-            ),
-            AuthInputField(
-              controller: lastNameController,
-              inputType: TextFieldType.text,
-              hintText: AppLocalizations.of(context)!.registerScreenLastName,
+              hintText: AppLocalizations.of(context)!.registerScreenUsername,
             ),
             AuthInputField(
               controller: emailController,
@@ -63,7 +66,19 @@ class SignInWithEmailPage extends StatelessWidget {
             const Spacer(),
             primaryButton(
               onPressed: (){
+                String username = usernameNameController.text;
+                String email = emailController.text;
+                String password = passwordController.text;
+                String confirmPassword = confirmPasswordController.text;
 
+                if(username.isEmpty || email.isEmpty || password.isEmpty || confirmPassword.isEmpty){
+                  return;
+                }
+                if(password != confirmPassword){
+                  return;
+                }
+
+                ref.read(authControllerProvider.notifier).signUp(email, password, username);
               },
               content: "Register",
               context: context,

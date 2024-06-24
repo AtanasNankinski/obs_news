@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 
 class BaseWidget extends StatelessWidget {
-  const BaseWidget({super.key, this.title, this.init, required this.hasPadding, required this.body});
+  const BaseWidget({super.key, this.title, required this.hasPadding, required this.body});
 
-  final VoidCallback? init;
   final bool hasPadding;
   final Widget body;
   final Widget? title;
