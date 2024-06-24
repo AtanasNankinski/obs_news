@@ -1,0 +1,8 @@
+{
+    "signIn": "Вписване",
+    "googleSignIn": "Google Вписване",
+    "facebookSignIn": "Facebook Вписване",
+    "signInSeparator": "или",
+    "emailSignIn": "Email Вписване",
+    "localizationError": "Възникна грешка при промяна на езика."
+}

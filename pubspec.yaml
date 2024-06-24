@@ -30,6 +30,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -37,6 +39,10 @@ dependencies:
   cupertino_icons: ^1.0.6
   mocktail: 1.0.3
   flutter_native_splash: 2.4.0
+  intl: 0.19.0
+  flutter_riverpod: 2.5.1
+  shared_preferences: 2.2.3
+  riverpod_annotation: 2.3.5
 
 flutter_native_splash:
   color: "#693580"
@@ -54,13 +60,18 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^3.0.0
+  flutter_lints: 3.0.0
+  riverpod_generator: 2.4.0
+  build_runner: 2.4.11
+  custom_lint: 0.6.4
+  riverpod_lint: 2.3.10
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter packages.
 flutter:
+  generate: true
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
