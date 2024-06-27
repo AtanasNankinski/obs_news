@@ -1,23 +1,27 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
+import 'package:obs_news/features/splash_screen/splash_controller.dart';
 import 'package:obs_news/shared/navigation/routing_constants.dart';
 
-class SplashScreenPage extends StatefulWidget {
+class SplashScreenPage extends ConsumerStatefulWidget {
   const SplashScreenPage({super.key});
 
   @override
-  State<SplashScreenPage> createState() => _SplashScreenPageState();
+  ConsumerState<SplashScreenPage> createState() => _SplashScreenPageState();
 }
 
-class _SplashScreenPageState extends State<SplashScreenPage> {
+class _SplashScreenPageState extends ConsumerState<SplashScreenPage> {
   Timer? _timer;
 
   @override
   void initState() {
     _timer = Timer(const Duration(seconds: 4), () {
-      Navigator.of(context).pushReplacementNamed(RoutingConst.defaultRoute);
+      ref.read(splashControllerProvider.notifier).splashIsDisplayed();
+      context.pushReplacementNamed(RoutingConst.home);
     });
     super.initState();
   }

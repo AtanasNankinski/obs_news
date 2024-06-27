@@ -1,36 +1,43 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 import 'package:obs_news/features/authentication/auth_repository.dart';
+import 'package:obs_news/shared/exceptions/exceptions.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'auth_repository_impl.g.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
   final FirebaseAuth _auth;
+  final GoogleSignIn _googleSignIn;
 
-  AuthRepositoryImpl(this._auth);
+  AuthRepositoryImpl(this._auth, this._googleSignIn);
 
   @override
-  Future<User?> signUpWithEmailAndPassword(String email, String password, String username) async {
+  Future<User?> signUpWithEmailAndPassword(String email, String password) async {
     try {
-      final credential = await _auth.createUserWithEmailAndPassword(email: email, password: password)
-          .then((user) async {
-            await _auth.currentUser!.updateDisplayName(username);
-          });
-      return credential.user;
+      final credentials = await _auth.createUserWithEmailAndPassword(email: email, password: password);
+      await Future.delayed(const Duration(seconds: 1));
+      return credentials.user;
     } catch(e) {
-      throw FirebaseAuthException(code: e.toString());
+      throw AuthException(e.toString()).message!;
     }
   }
 
   @override
-  Future<User?> signInWithEmailAndPassword(String email, String password) {
+  Future<User?> signInWithEmailAndPassword(String email, String password) async {
     try {
-      final credential = _auth.signInWithEmailAndPassword(email: email, password: password);
-      return credential.then((value) => value.user);
+      final credential = await _auth.signInWithEmailAndPassword(email: email, password: password);
+      return credential.user;
     } catch(e) {
-      throw FirebaseAuthException(code: e.toString());
+      throw AuthException(e.toString()).message!;
     }
+  }
+
+  @override
+  Future<User> updateUsername(User user, String username) async {
+    await _auth.currentUser!.updateDisplayName(username);
+    return user;
   }
 
   @override
@@ -38,7 +45,7 @@ class AuthRepositoryImpl implements AuthRepository {
     try {
       return _auth.authStateChanges();
     } catch(e) {
-      throw FirebaseAuthException(code: e.toString());
+      throw AuthException(e.toString()).message!;
     }
   }
 
@@ -46,14 +53,42 @@ class AuthRepositoryImpl implements AuthRepository {
   Future<void> signOut() async {
     try {
       await _auth.signOut();
+      await _googleSignIn.signOut();
     } catch(e) {
-      throw FirebaseAuthException(code: e.toString());
+      throw AuthException(e.toString()).message!;
+    }
+  }
+
+  @override
+  Future<void> googleSignIn() async {
+    try {
+      final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+
+      if(googleUser == null) throw GoogleAuthException().message!;
+
+      final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+      await _auth.signInWithCredential(credential);
+    } catch(e) {
+      throw GoogleAuthException().message!;
     }
   }
 }
 
 @riverpod
-AuthRepository authRepository(AuthRepositoryRef ref) => AuthRepositoryImpl(ref.read(firebaseAuthProvider));
+AuthRepository authRepository(AuthRepositoryRef ref) => AuthRepositoryImpl(ref.read(firebaseAuthProvider), ref.read(googleSignInProvider));
 
 @riverpod
-FirebaseAuth firebaseAuth(FirebaseAuthRef ref) => FirebaseAuth.instance;
+Stream<User?> user(UserRef ref) {
+  final firebaseAuth = ref.watch(authRepositoryProvider);
+  return firebaseAuth.getCurrentUser();
+}
+
+@riverpod
+Raw<FirebaseAuth> firebaseAuth(FirebaseAuthRef ref) => FirebaseAuth.instance;
+
+@riverpod
+Raw<GoogleSignIn> googleSignIn(GoogleSignInRef ref) => GoogleSignIn();

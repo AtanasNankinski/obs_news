@@ -6,7 +6,7 @@ import 'package:obs_news/shared/components/decorations/input_decorations.dart';
 import 'package:obs_news/shared/theme/colors.dart';
 
 class AuthInputField extends ConsumerWidget {
-  const AuthInputField({super.key, required this.controller, required this.inputType, this.hintText = "", this.enabled = true, this.onChanged});
+  const AuthInputField({super.key, required this.controller, required this.inputType, required this.hintText, this.enabled = true, this.onChanged});
 
   final TextEditingController controller;
   final TextFieldType inputType;
@@ -23,11 +23,11 @@ class AuthInputField extends ConsumerWidget {
       child: TextField(
         decoration: !_isPasswordField(inputType)
             ? defaultTextFieldDecoration(
-          hintText: _determineHintText(inputType, hintText),
+          hintText: hintText,
           context: context,
         )
             : defaultTextFieldDecoration(
-          hintText: _determineHintText(inputType, hintText),
+          hintText: hintText,
           context: context,)
             .copyWith(
           suffixIcon: IconButton(
@@ -59,22 +59,6 @@ class AuthInputField extends ConsumerWidget {
         enabled: enabled,
       ),
     );
-  }
-
-  String _determineHintText(TextFieldType inputType, String hintText){
-    switch(inputType) {
-      case TextFieldType.email:
-        return "Email";
-      case TextFieldType.password:
-        return "Password";
-      case TextFieldType.passwordConfirmation:
-        return "Confirm Password";
-      case TextFieldType.text:
-        if(hintText != ""){
-          return hintText;
-        }
-        return "Text";
-    }
   }
 
   bool _isPasswordField(TextFieldType inputType){

@@ -2,13 +2,18 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
+import 'package:obs_news/features/authentication/auth_controller.dart';
 import 'package:obs_news/shared/components/base_layout.dart';
 import 'package:obs_news/shared/components/buttons/flag_button.dart';
 import 'package:obs_news/shared/components/buttons/google_button.dart';
 import 'package:obs_news/shared/components/buttons/primary_button.dart';
+import 'package:obs_news/shared/components/loading_widget.dart';
 import 'package:obs_news/shared/components/separator_with_text.dart';
 import 'package:obs_news/shared/components/buttons/facebook_button.dart';
+import 'package:obs_news/shared/extensions/async_value_ui.dart';
+import 'package:obs_news/shared/extensions/string_extentions.dart';
 import 'package:obs_news/shared/localization/localization_controller.dart';
 import 'package:obs_news/shared/navigation/routing_constants.dart';
 
@@ -18,8 +23,11 @@ class SignInPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final Locale localeState = ref.watch(localizationControllerProvider);
+    ref.listen(authControllerProvider, (_, next) {
+      next.showSnackBarOnError(context);
+    });
 
-    return BaseWidget(
+    return ref.watch(authControllerProvider).isLoading ? const LoadingWidget() : BaseWidget(
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -30,7 +38,7 @@ class SignInPage extends ConsumerWidget {
           const Spacer(),
           googleButton(
             onPressed: (){
-
+              ref.read(authControllerProvider.notifier).googleSignIn();
             },
             content: AppLocalizations.of(context)!.googleSignIn,
           ),
@@ -44,7 +52,8 @@ class SignInPage extends ConsumerWidget {
           ),
           primaryButton(
             onPressed: (){
-              Navigator.pushNamed(context, RoutingConst.signInWithEmail);
+              print("Navigating to the sign in with email screen...");
+              context.go(RoutingConst.signInWithEmail.loggedOutRoute());
             },
             content: AppLocalizations.of(context)!.emailSignIn,
             context: context,
