@@ -6,7 +6,7 @@ part of 'auth_repository_impl.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$authRepositoryHash() => r'711d3d0c58f088a73ec05c9482a5d71cd4a7b60e';
+String _$authRepositoryHash() => r'02b23af42a8f55458ff569326e521408efe6b6cd';
 
 /// See also [authRepository].
 @ProviderFor(authRepository)
@@ -21,20 +21,6 @@ final authRepositoryProvider = AutoDisposeProvider<AuthRepository>.internal(
 );
 
 typedef AuthRepositoryRef = AutoDisposeProviderRef<AuthRepository>;
-String _$userHash() => r'812221686a12c4cc078665abbfb9fa46013b7835';
-
-/// See also [user].
-@ProviderFor(user)
-final userProvider = AutoDisposeStreamProvider<User?>.internal(
-  user,
-  name: r'userProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$userHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-typedef UserRef = AutoDisposeStreamProviderRef<User?>;
 String _$firebaseAuthHash() => r'248586fcce55a4e242479f7974468677dd10df78';
 
 /// See also [firebaseAuth].
@@ -63,5 +49,19 @@ final googleSignInProvider = AutoDisposeProvider<Raw<GoogleSignIn>>.internal(
 );
 
 typedef GoogleSignInRef = AutoDisposeProviderRef<Raw<GoogleSignIn>>;
+String _$facebookAuthHash() => r'2bf9dd1453a915ff70b1a972dc2a7c8e95c78abb';
+
+/// See also [facebookAuth].
+@ProviderFor(facebookAuth)
+final facebookAuthProvider = AutoDisposeProvider<Raw<FacebookAuth>>.internal(
+  facebookAuth,
+  name: r'facebookAuthProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$facebookAuthHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef FacebookAuthRef = AutoDisposeProviderRef<Raw<FacebookAuth>>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

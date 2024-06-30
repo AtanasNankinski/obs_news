@@ -3,10 +3,9 @@ class BaseException implements Exception {
 
   BaseException({this.message}) {
     message ??= "Unknown Error Occurred";
-    _logError();
   }
 
-  void _logError() {
+  void _logError(String message) {
     print("##################ERROR LOG##################");
     print(message);
     print("##################END##################");
@@ -18,7 +17,7 @@ class AuthException extends BaseException {
 
   AuthException(this.code, {super.message}) {
     message = _getMessageFromErrorCode();
-    super._logError();
+    super._logError(message!);
   }
 
   String _getMessageFromErrorCode() {
@@ -44,7 +43,14 @@ class AuthException extends BaseException {
 
 class GoogleAuthException extends BaseException {
   GoogleAuthException({super.message}) {
-    super._logError();
-    message = "Exception occurred while trying to use Google Authentication.";
+    message = "Exception occurred while trying to use Google Sign In.";
+    super._logError(message!);
+  }
+}
+
+class FacebookAuthException extends BaseException {
+  FacebookAuthException({super.message}) {
+    message = "Exception occurred while trying to use Facebook Sign In.";
+    super._logError(message!);
   }
 }

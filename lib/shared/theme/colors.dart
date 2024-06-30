@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 //Common Colors
 const Color primaryColor = Color(0xFF8730B2);
+final Color loadingWidgetBackground = Colors.black.withOpacity(0.4);
+final Color loadingIndicatorColor = Colors.white.withOpacity(0.8);
 //AppBar Colors
 const Color appBarColor = Color(0xFF752899);
 //Text Colors

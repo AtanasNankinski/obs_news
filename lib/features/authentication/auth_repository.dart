@@ -5,11 +5,13 @@ abstract class AuthRepository {
 
   Future<User?> signInWithEmailAndPassword(String email, String password);
 
-  Future<User> updateUsername(User user, String username);
+  Future<void> updateUsername(User user, String username);
 
   Future<void> signOut();
 
   Future<void> googleSignIn();
+
+  Future<void> facebookSignIn();
 
   Stream<User?> getCurrentUser();
 

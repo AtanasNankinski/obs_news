@@ -8,7 +8,11 @@ extension AsyncValueUI on AsyncValue {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Center(
-            child: Text(error.toString())
+            child: Text(
+              error.toString(),
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.bodyMedium,
+            )
           ),
         ),
       );

@@ -31,6 +31,7 @@ class LoginPage extends ConsumerWidget {
         FocusScope.of(context).requestFocus(FocusNode());
       },
       child: BaseWidget(
+        isLoading: ref.watch(authControllerProvider).isLoading,
         hasPadding: true,
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -78,7 +79,7 @@ class LoginPage extends ConsumerWidget {
                       ),
                       recognizer: TapGestureRecognizer()
                         ..onTap = (){
-                          context.go(RoutingConst.signInWithEmail.loggedOutRoute());
+                          context.go(RoutingPaths.signInWithEmail.loggedOutRoute());
                         },
                     ),
                     TextSpan(

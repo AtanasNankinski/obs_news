@@ -1,26 +1,26 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'auth_controller.dart';
+part of 'user_controller.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$authControllerHash() => r'9fae222aa7eb29c62d0a3bc31b81e51a009fd642';
+String _$userControllerHash() => r'7c0de5fe0ba0292e3d3238be396e97d0fbd0f14f';
 
-/// See also [AuthController].
-@ProviderFor(AuthController)
-final authControllerProvider =
-    AutoDisposeAsyncNotifierProvider<AuthController, User?>.internal(
-  AuthController.new,
-  name: r'authControllerProvider',
+/// See also [UserController].
+@ProviderFor(UserController)
+final userControllerProvider =
+    AutoDisposeStreamNotifierProvider<UserController, User?>.internal(
+  UserController.new,
+  name: r'userControllerProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$authControllerHash,
+      : _$userControllerHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$AuthController = AutoDisposeAsyncNotifier<User?>;
+typedef _$UserController = AutoDisposeStreamNotifier<User?>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

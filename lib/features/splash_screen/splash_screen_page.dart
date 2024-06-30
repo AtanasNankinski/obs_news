@@ -21,7 +21,7 @@ class _SplashScreenPageState extends ConsumerState<SplashScreenPage> {
   void initState() {
     _timer = Timer(const Duration(seconds: 4), () {
       ref.read(splashControllerProvider.notifier).splashIsDisplayed();
-      context.pushReplacementNamed(RoutingConst.home);
+      context.go(RoutingPaths.home);
     });
     super.initState();
   }

@@ -11,8 +11,9 @@ class AuthController extends _$AuthController {
   late AuthRepository _authRepository;
 
   @override
-  FutureOr<User?> build() {
+  FutureOr<User?> build() async {
     _authRepository = ref.read(authRepositoryProvider);
+    return null;
   }
 
   Future<void> signUp(String email, String password) async {
@@ -27,6 +28,7 @@ class AuthController extends _$AuthController {
 
   Future<void> signOut() async {
     await ref.read(authRepositoryProvider).signOut();
+    ref.invalidateSelf();
   }
 
   Future<void> googleSignIn() async {
@@ -37,7 +39,19 @@ class AuthController extends _$AuthController {
         state = AsyncData(data);
       });
     } catch(e) {
-      rethrow;
+      state = AsyncError(e, StackTrace.current);
+    }
+  }
+
+  Future<void> facebookSignIn() async {
+    try {
+      state = AsyncLoading();
+      await _authRepository.facebookSignIn();
+      _authRepository.getCurrentUser().listen((data) {
+        state = AsyncData(data);
+      });
+    } catch(e) {
+      state = AsyncError(e, StackTrace.current);
     }
   }
 }

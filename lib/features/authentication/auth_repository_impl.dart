@@ -1,22 +1,26 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 
 import 'package:obs_news/features/authentication/auth_repository.dart';
 import 'package:obs_news/shared/exceptions/exceptions.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'auth_repository_impl.g.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
   final FirebaseAuth _auth;
   final GoogleSignIn _googleSignIn;
+  final FacebookAuth _facebookAuth;
 
-  AuthRepositoryImpl(this._auth, this._googleSignIn);
+  AuthRepositoryImpl(this._auth, this._googleSignIn, this._facebookAuth);
 
   @override
   Future<User?> signUpWithEmailAndPassword(String email, String password) async {
     try {
       final credentials = await _auth.createUserWithEmailAndPassword(email: email, password: password);
+      if(credentials.user == null) return null;
+      await _auth.currentUser!.updateDisplayName("New User");
       await Future.delayed(const Duration(seconds: 1));
       return credentials.user;
     } catch(e) {
@@ -35,9 +39,8 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<User> updateUsername(User user, String username) async {
+  Future<void> updateUsername(User user, String username) async {
     await _auth.currentUser!.updateDisplayName(username);
-    return user;
   }
 
   @override
@@ -54,6 +57,7 @@ class AuthRepositoryImpl implements AuthRepository {
     try {
       await _auth.signOut();
       await _googleSignIn.signOut();
+      await _facebookAuth.logOut();
     } catch(e) {
       throw AuthException(e.toString()).message!;
     }
@@ -62,6 +66,8 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<void> googleSignIn() async {
     try {
+      await Future.delayed(Duration(seconds: 3));
+      throw "Test Error";
       final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
 
       if(googleUser == null) throw GoogleAuthException().message!;
@@ -76,19 +82,30 @@ class AuthRepositoryImpl implements AuthRepository {
       throw GoogleAuthException().message!;
     }
   }
+
+  @override
+  Future<void> facebookSignIn() async {
+    try {
+      final LoginResult facebookUser = await _facebookAuth.login();
+
+      if(facebookUser.accessToken == null) throw FacebookAuthException().message!;
+
+      final OAuthCredential facebookAuthCredential = FacebookAuthProvider.credential(facebookUser.accessToken!.tokenString);
+      await _auth.signInWithCredential(facebookAuthCredential);
+    } catch(e) {
+      throw FacebookAuthException().message!;
+    }
+  }
 }
 
 @riverpod
-AuthRepository authRepository(AuthRepositoryRef ref) => AuthRepositoryImpl(ref.read(firebaseAuthProvider), ref.read(googleSignInProvider));
-
-@riverpod
-Stream<User?> user(UserRef ref) {
-  final firebaseAuth = ref.watch(authRepositoryProvider);
-  return firebaseAuth.getCurrentUser();
-}
+AuthRepository authRepository(AuthRepositoryRef ref) => AuthRepositoryImpl(ref.read(firebaseAuthProvider), ref.read(googleSignInProvider), ref.read(facebookAuthProvider));
 
 @riverpod
 Raw<FirebaseAuth> firebaseAuth(FirebaseAuthRef ref) => FirebaseAuth.instance;
 
 @riverpod
 Raw<GoogleSignIn> googleSignIn(GoogleSignInRef ref) => GoogleSignIn();
+
+@riverpod
+Raw<FacebookAuth> facebookAuth(FacebookAuthRef ref) => FacebookAuth.instance;

@@ -1,28 +1,28 @@
 import 'package:flutter/material.dart';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:obs_news/features/authentication/auth_controller.dart';
-import 'package:obs_news/features/authentication/auth_repository_impl.dart';
+import 'package:obs_news/features/authentication/user_controller.dart';
 import 'package:obs_news/shared/components/base_layout.dart';
 import 'package:obs_news/shared/components/buttons/primary_button.dart';
+import 'package:obs_news/shared/components/loading_widget.dart';
 
 class NewsPage extends ConsumerWidget {
   const NewsPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final authProvider = ref.watch(userProvider);
+    final authProvider = ref.watch(userControllerProvider);
 
     String email = "";
 
     authProvider.whenData((data) {
-      if(data != null) {
-        email = data.email ?? "[name placeholder]";
-      }
+      email = _checkEmail(data);
     });
 
-    return BaseWidget(
+    return authProvider.isLoading ? const LoadingWidget() : BaseWidget(
       hasPadding: true,
       title: Text(
         "News",
@@ -44,5 +44,14 @@ class NewsPage extends ConsumerWidget {
         ],
       ),
     );
+  }
+
+  String _checkEmail(User? user) {
+    if(user != null) {
+      if(user.email != null) {
+        return user.email!;
+      }
+    }
+    return "[email placeholder]";
   }
 }
