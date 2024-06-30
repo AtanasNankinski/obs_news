@@ -66,8 +66,6 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<void> googleSignIn() async {
     try {
-      await Future.delayed(Duration(seconds: 3));
-      throw "Test Error";
       final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
 
       if(googleUser == null) throw GoogleAuthException().message!;
